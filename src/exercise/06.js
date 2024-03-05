@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 // useEffect: HTTP requests
 // http://localhost:3000/isolated/exercise/06.js
@@ -7,6 +8,7 @@ import {fetchPokemon} from '../pokemon'
 import {PokemonInfoFallback} from '../pokemon'
 import {PokemonDataView} from '../pokemon'
 import {PokemonForm} from '../pokemon'
+import {ErrorBoundary} from 'react-error-boundary'
 
 function PokemonInfo({pokemonName}) {
   const [status, setStatus] = React.useState(['Idle', null])
@@ -51,7 +53,9 @@ function App() {
       <PokemonForm pokemonName={pokemonName} onSubmit={handleSubmit} />
       <hr />
       <div className="pokemon-info">
-        <PokemonInfo pokemonName={pokemonName} />
+        <ErrorBoundary fallback={<div>Something went wrong!</div>}>
+          <PokemonInfo pokemonName={pokemonName} />
+        </ErrorBoundary>
       </div>
     </div>
   )
