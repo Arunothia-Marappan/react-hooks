@@ -23,7 +23,6 @@ function PokemonInfo({pokemonName}) {
   }
   React.useEffect(() => {
     if (!pokemonName) return
-    setPokemon(null)
     setStatus('Pending')
     fetchPokemon(pokemonName)
       .then(pokemonData => {
